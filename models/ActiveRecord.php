@@ -98,10 +98,10 @@ class ActiveRecord {
     public function save() {
         $result = '';
         if(!is_null($this->id)) {
-            // actualizar
+            // Update
             $result = $this->update();
         } else {
-            // Creando un nuevo registro
+            // Create
             $result = $this->create();
         }
         return $result;
