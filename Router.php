@@ -18,7 +18,7 @@ class Router {
 
     public function checkRoutes()
     {
-        $current_url = $_SERVER['PATH_INFO'] ?? '/';
+        $current_url = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
         $method = $_SERVER['REQUEST_METHOD'];
 
         if ($method === 'GET') {
@@ -44,13 +44,9 @@ class Router {
 
         include_once __DIR__ . "/views/$view.php";
 
-        $content = ob_get_clean(); // Limpia el Buffer
+        $content = ob_get_clean(); // Clean buffer
 
-        if (isset($_SERVER['PATH_INFO'])) {
-            $current_url = $_SERVER['PATH_INFO'] ?? '/';
-        } else {
-            $current_url = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'];
-        }
+        $current_url = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
 
         if (str_contains($current_url, '/admin')) {
             include_once __DIR__ . '/views/admin-layout.php';
