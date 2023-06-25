@@ -18,7 +18,7 @@ function current_page($path) : bool {
 }
 
 function is_auth() : bool {
-    if (!isset($_SESSION)) {
+    if (!isset($_SESSION) && !headers_sent()) {
         session_start();
     }
 
@@ -26,7 +26,7 @@ function is_auth() : bool {
 }
 
 function is_admin() : bool {
-    if (!isset($_SESSION)) {
+    if (!isset($_SESSION) && !headers_sent()) {
         session_start();
     }
 
